@@ -248,6 +248,22 @@ public class BaseActivity extends AppCompatActivity {
         hardcode.entryPoints.add(new LatLng(37.617809,-122.386687));
         hardcode.entryPoints.add(new LatLng(37.616845,-122.384237));
         hardcode.entryPoints.add(new LatLng(37.614802,-122.385497));
+
+        hardcode.pathPoints = new ArrayList<>();
+        hardcode.pathPoints.add(new LatLng(37.614802,-122.385497));
+        hardcode.pathPoints.add(new LatLng(37.61584137416485,-122.38449577242135 ));
+        hardcode.pathPoints.add(new LatLng(37.61740747841049,-122.38484378904106 ));
+        hardcode.pathPoints.add(new LatLng(37.61779548048554,-122.38618958741426 ));
+        hardcode.pathPoints.add(new LatLng(37.617700671130514,-122.38750655204058));
+
+
+        hardcode.pathNames = new ArrayList<>();
+        hardcode.pathNames.add("User Location");
+        hardcode.pathNames.add("McDonalds");
+        hardcode.pathNames.add("WashRoom");
+        hardcode.pathNames.add("Book Store");
+        hardcode.pathNames.add("Exit Terminals");
+
     }
 
 

@@ -28,6 +28,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.IndoorLevel;
 import com.google.android.gms.maps.model.LatLng;
@@ -49,13 +51,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import swift.navme.Hardcode.hardcode;
+
 /**
  * A demo activity showing how to use indoor.
  */
-public class MapsActivity3 extends AppCompatActivity implements OnMapReadyCallback {
-
+public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private LatLng point1, point2, origin;
+    private ArrayList<Circle> drawnCircle;
+    int i = 2;
+    int k = 0;
 
 
     private boolean showLevelPicker = true;
@@ -68,14 +74,14 @@ public class MapsActivity3 extends AppCompatActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        drawnCircle = new ArrayList<>();
 
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        origin = new LatLng(37.614631, -122.385153);
+        origin = hardcode.entryPoints.get(2);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 18));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -97,19 +103,11 @@ public class MapsActivity3 extends AppCompatActivity implements OnMapReadyCallba
      * Called when the focused building info is clicked.
      */
     public void onFocusedBuildingInfo(View view) {
-        IndoorBuilding building = mMap.getFocusedBuilding();
-        if (building != null) {
-            StringBuilder s = new StringBuilder();
-            for (IndoorLevel level : building.getLevels()) {
-                s.append(level.getName()).append(" ");
-            }
-            if (building.isUnderground()) {
-                s.append("is underground");
-            }
-            setText(s.toString());
-        } else {
-            setText("No visible building");
-        }
+        int s = k;
+        int e = (k+1);
+        drawPath(hardcode.pathPoints.get(s), hardcode.pathPoints.get(e));
+        if(k+1 == 4) k=0;
+        else k++;
     }
 
     /**
@@ -189,7 +187,7 @@ public class MapsActivity3 extends AppCompatActivity implements OnMapReadyCallba
 //        .color(Color.parseColor("#05b1fb"))//Google maps blue color
 //        .geodesic(true));
 
-        String urlPass = makeURL(origin.latitude, origin.longitude, point1.latitude, point1.longitude);
+        String urlPass = makeURL(pos1.latitude, pos1.longitude, pos2.latitude, pos2.longitude);
         ConnectAsyncTask asyncTask = new ConnectAsyncTask(urlPass);
         asyncTask.execute();
 
@@ -314,5 +312,26 @@ public class MapsActivity3 extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
+    private void drawCircle(LatLng center, float r){
+        Circle circle = mMap.addCircle(new CircleOptions()
+                .center(center)
+                .radius(r)
+                .strokeColor(Color.BLACK)
+                .strokeWidth((float) 1)
+                .fillColor(Color.argb(70,0,0,255)));
+        drawnCircle.add(circle);
+    }
 
+
+
+    public void onLocateMeClicked(View view) {
+        int point = (i++)%3;
+        drawCircle(hardcode.entryPoints.get(point),8);
+    }
+
+    public void onStubClicked(View view) {
+        for(int i = 0; i < drawnCircle.size(); i++){
+            drawnCircle.get(i).setVisible(false);
+        }
+    }
 }

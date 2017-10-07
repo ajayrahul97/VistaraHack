@@ -62,7 +62,6 @@ public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
     int i = 2;
 
 
-
     private boolean showLevelPicker = true;
 
     @Override
@@ -81,6 +80,7 @@ public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         mMap = map;
         origin = new LatLng(37.614631, -122.385153);
+        point2 = origin;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 18));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -176,7 +176,8 @@ public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
     }
 
     public void onAddPath(View view) {
-        drawPath(point1, origin);
+        drawPath(point1, point2);
+        point2 = point1;
     }
 
     private void setText(String message) {
@@ -197,7 +198,7 @@ public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
 //        .color(Color.parseColor("#05b1fb"))//Google maps blue color
 //        .geodesic(true));
 
-        String url = getDirectionsUrl(origin, point1);
+        String url = getDirectionsUrl(pos1, pos2);
 
         DownloadTask downloadTask = new DownloadTask();
 
