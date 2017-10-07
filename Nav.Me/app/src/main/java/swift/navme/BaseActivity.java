@@ -258,11 +258,20 @@ public class BaseActivity extends AppCompatActivity {
 
 
         hardcode.pathNames = new ArrayList<>();
-        hardcode.pathNames.add("User Location");
+        hardcode.pathNames.add("Your Location");
         hardcode.pathNames.add("McDonalds");
         hardcode.pathNames.add("WashRoom");
         hardcode.pathNames.add("Book Store");
-        hardcode.pathNames.add("Exit Terminals");
+        hardcode.pathNames.add("Gate No .2");
+
+
+        hardcode.pathSnippets = new ArrayList<>();
+        hardcode.pathSnippets.add("Current Location");
+        hardcode.pathSnippets.add("Restaurant | Burgers&Fries | 4.5/5");
+        hardcode.pathSnippets.add(" ");
+        hardcode.pathSnippets.add("Bibliophile Corner | Free Reading | 4.8/5");
+        hardcode.pathSnippets.add("Boarding Gate | Time Remaining to board : 2hrs 30min");
+
 
     }
 

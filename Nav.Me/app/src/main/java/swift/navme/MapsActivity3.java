@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.IndoorLevel;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -56,7 +57,7 @@ import swift.navme.Hardcode.hardcode;
 /**
  * A demo activity showing how to use indoor.
  */
-public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
+public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindowClickListener,OnMapReadyCallback {
     private GoogleMap mMap;
     private LatLng point1, point2, origin;
     private ArrayList<Circle> drawnCircle;
@@ -79,6 +80,13 @@ public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
     }
 
     @Override
+    public void onInfoWindowClick(Marker marker) {
+       if(marker.isInfoWindowShown()){
+           marker.hideInfoWindow();
+       }
+    }
+
+    @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
         origin = hardcode.entryPoints.get(2);
@@ -89,6 +97,7 @@ public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
                 point1 = latLng;
             }
         });
+        mMap.setOnInfoWindowClickListener(this);
     }
 
     /**
@@ -106,6 +115,7 @@ public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
         int s = k;
         int e = (k+1);
         drawPath(hardcode.pathPoints.get(s), hardcode.pathPoints.get(e));
+        addMarkers(hardcode.pathPoints.get(e),hardcode.pathNames.get(e),hardcode.pathSnippets.get(e));
         if(k+1 == 4) k=0;
         else k++;
     }
@@ -156,7 +166,7 @@ public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
 
     public void onAddMarker(View view) {
         if (point1 != null) {
-            addMarkers(point1, "Here");
+            addMarkers(point1, "Here","Snippet");
         }
         Toast.makeText(MapsActivity3.this, "Cdnt:" + String.valueOf(point1.latitude) + ".." + String.valueOf(point1.longitude), Toast.LENGTH_LONG
         );
@@ -174,8 +184,12 @@ public class MapsActivity3 extends BaseActivity implements OnMapReadyCallback {
         text.setText(message);
     }
 
-    public void addMarkers(LatLng pos, String text) {
-        mMap.addMarker(new MarkerOptions().position(pos).title(text));
+    public void addMarkers(LatLng pos, String text,String snip) {
+        mMap.addMarker(new MarkerOptions()
+                .position(pos)
+                .title(text)
+                .snippet(snip)
+                .draggable(false));
 
     }
 
