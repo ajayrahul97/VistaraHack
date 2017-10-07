@@ -8,6 +8,10 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -37,7 +41,28 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+
+        <activity android:name=".BaseActivity"></activity>
+
+
+        <service
+            android:name="com.kontakt.sdk.android.ble.service.ProximityService"
+            android:exported="false" />
+        <service android:name=".BeaconService.BeaconFinderService" />
+
+        <receiver android:name=".BeaconService.ConnectBeaconListener">
+            <intent-filter>
+                <action android:name="connectBeacon" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".BeaconService.DisconnectBeaconListener">
+            <intent-filter>
+                <action android:name="disconnectBeacon" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MapsActivity2"
             android:label="@string/title_activity_maps"></activity>
