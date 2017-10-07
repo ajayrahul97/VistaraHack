@@ -22,8 +22,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Status"
+        android:id="@+id/btn_getstatus"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/pnr_editText"
         android:onClick="OnClickGetStatus"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or"
+        android:id="@+id/tv_getstatus"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_getstatus"
+        android:onClick="OnClickGetStatus"/>
+
+    <ImageView
+        android:id="@+id/barcode_icon"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv_getstatus"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_barcode"
+        android:onClick="barcodeScan"/>
 </RelativeLayout>
