@@ -5,18 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import swift.navme.draganddrop.RecyclerActivity;
-
-public class FlightDetails extends AppCompatActivity {
+public class EnterPnrActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flight_details);
+        setContentView(R.layout.activity_enter_pnr);
     }
 
-    public void OnClickContinue(View view) {
-        Intent i = new Intent(this, RecyclerActivity.class);
+    public void OnClickGetStatus(View view) {
+        Intent i = new Intent(this, FlightDetails.class);
         startActivity(i);
     }
 }

@@ -19,9 +19,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to user preferences"
+        android:text="Go to pnr status"
         android:id="@+id/user_preference"
         app:layout_constraintTop_toBottomOf="@id/gotomaps"
-        android:onClick="OnClickUserPreference"/>
+        android:onClick="OnClickPnrStatus"/>
 
 </android.support.constraint.ConstraintLayout>
