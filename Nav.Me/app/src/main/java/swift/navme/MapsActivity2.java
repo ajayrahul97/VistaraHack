@@ -15,17 +15,6 @@
 
 package swift.navme;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.IndoorBuilding;
-import com.google.android.gms.maps.model.IndoorLevel;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +23,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.IndoorBuilding;
+import com.google.android.gms.maps.model.IndoorLevel;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
 
@@ -53,7 +52,7 @@ import java.util.List;
 public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LatLng point1, point2,origin;
+    private LatLng point1, point2, origin;
 
 
     private boolean showLevelPicker = true;
@@ -154,19 +153,19 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
-    public void onAddMarker(View view){
-        if(point1!=null){
-            addMarkers(point1,"Here");
+    public void onAddMarker(View view) {
+        if (point1 != null) {
+            addMarkers(point1, "Here");
         }
-        Toast.makeText(MapsActivity2.this,"Cdnt:"+ String.valueOf(point1.latitude)+".."+String.valueOf(point1.longitude),Toast.LENGTH_LONG
+        Toast.makeText(MapsActivity2.this, "Cdnt:" + String.valueOf(point1.latitude) + ".." + String.valueOf(point1.longitude), Toast.LENGTH_LONG
         );
-        Log.e("cdnt",String.valueOf(point1.latitude)+".."+String.valueOf(point1.longitude));
+        Log.e("cdnt", String.valueOf(point1.latitude) + ".." + String.valueOf(point1.longitude));
 
 
     }
 
-    public void onAddPath(View view){
-        drawPath(point1,origin);
+    public void onAddPath(View view) {
+        drawPath(point1, origin);
     }
 
     private void setText(String message) {
@@ -174,12 +173,12 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         text.setText(message);
     }
 
-    public void addMarkers(LatLng pos,String text){
+    public void addMarkers(LatLng pos, String text) {
         mMap.addMarker(new MarkerOptions().position(pos).title(text));
 
     }
 
-    public void drawPath(LatLng pos1, LatLng pos2){
+    public void drawPath(LatLng pos1, LatLng pos2) {
 
 //        Polyline polyline  = mMap.addPolyline(new PolylineOptions()
 //        .add(pos1,pos2)
@@ -196,7 +195,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
-    private class DownloadTask extends AsyncTask <String, Void, String> {
+    private class DownloadTask extends AsyncTask<String, Void, String> {
 
 
         protected String doInBackground(String... url) {
@@ -213,45 +212,49 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             ParserTask parserTask = new ParserTask();
-
-
             parserTask.execute(result);
 
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>>> {
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
         // Parsing the data in non-ui thread
         @Override
-        protected List<List<HashMap<String,String>>> doInBackground(String... jsonData) {
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
             JSONObject jObject;
-            List<List<HashMap<String,String>>> routes = null;
+            List<List<HashMap<String, String>>> routes = null;
 
             try {
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
 
                 routes = parser.parse(jObject);
+
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            if(routes!=null){
+                Log.e("reee","not null");
+            }else {
+                Log.e("reee","IT IS null");
             }
             return routes;
         }
 
-        protected void onPostExecute(List<List<HashMap<String,String>>> result) {
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
             PolylineOptions lineOptions = null;
             MarkerOptions markerOptions = new MarkerOptions();
 
+            //Log.e("result",result.size()+" "+result.get(0));
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList();
                 lineOptions = new PolylineOptions();
 
-                List<HashMap<String,String>> path = result.get(i);
+                List<HashMap<String, String>> path = result.get(i);
 
                 for (int j = 0; j < path.size(); j++) {
                     HashMap point = path.get(j);
@@ -271,7 +274,10 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
             }
 
 // Drawing polyline in the Google Map for the i-th route
-            mMap.addPolyline(lineOptions);
+           // if(lineOptions!=null){
+                mMap.addPolyline(lineOptions);
+           // }
+
         }
     }
 
@@ -285,7 +291,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
         // Sensor enabled
         String sensor = "sensor=false";
-        String mode = "mode=driving";
+        String mode = "mode=walking";
 
         // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
@@ -299,6 +305,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
         return url;
     }
+
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
