@@ -67,11 +67,11 @@
             <TableRow>
 
                 <Button
-                    android:id="@+id/add_marker"
+                    android:id="@+id/notify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onAddMarker"
-                    android:text="Add Marker" />
+                    android:onClick="onNotification"
+                    android:text="Notify" />
 
                 <Button
                     android:id="@+id/add_path"

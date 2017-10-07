@@ -15,10 +15,16 @@
 
 package swift.navme;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -63,8 +69,8 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
     private ArrayList<Circle> drawnCircle;
     int i = 2;
     int k = 0;
-
-
+    public int time = 20 ;
+    private NotificationCompat.Builder mBuilder;
     private boolean showLevelPicker = true;
 
     @Override
@@ -76,6 +82,19 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         drawnCircle = new ArrayList<>();
+        mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        mBuilder.setContentTitle("Boarding Alert!!");
+        mBuilder.setContentText("Time left to board plane :"+time+" mins!");
+        Intent resultIntent = new Intent(this,  MapsActivity3.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MapsActivity3.class);
+
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+
 
     }
 
@@ -342,6 +361,15 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         int point = (i++)%3;
         drawCircle(hardcode.entryPoints.get(point),8);
     }
+
+    public void onNotification(View view) {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+// notificationID allows you to update the notification later on.
+        mNotificationManager.notify(1, mBuilder.build());
+    }
+
+
 
     public void onStubClicked(View view) {
         for(int i = 0; i < drawnCircle.size(); i++){
