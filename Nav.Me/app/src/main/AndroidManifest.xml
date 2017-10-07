@@ -67,6 +67,10 @@
             android:name=".MapsActivity3"
             android:label="@string/title_activity_maps" />
         <activity android:name=".CityActivity"></activity>
+        <activity android:name=".SubPreferenceActivity" />
+        <activity android:name=".FlightDetails" />
+        <activity android:name=".EnterPnrActivity" />
+        <activity android:name=".UserPreferenceActivity"></activity>
     </application>
 
 </manifest>

@@ -49,12 +49,6 @@
 
             <TableRow>
 
-                <Button
-                    android:id="@+id/focused_building_info_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onFocusedBuildingInfo"
-                    android:text="Next" />
 
                 <Button
                     android:id="@+id/toggle_level_picker_button"
@@ -62,33 +56,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="onToggleLevelPicker"
                     android:text="Toggle Level Picker" />
-            </TableRow>
 
-            <TableRow>
-
-                <Button
-                    android:id="@+id/notify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onNotification"
-                    android:text="Notify" />
-
-                <Button
-                    android:id="@+id/add_path"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onAddPath"
-                    android:text="Add Path" />
-            </TableRow>
-
-            <TableRow>
-
-                <Button
-                    android:id="@+id/focused_level_info_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onVisibleLevelInfo"
-                    android:text="Focused Level" />
 
                 <Button
                     android:id="@+id/higher_level_button"
@@ -99,22 +67,7 @@
             </TableRow>
 
 
-            <TableRow>
 
-                <Button
-                    android:id="@+id/locate_me_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onLocateMeClicked"
-                    android:text="Locate Me" />
-
-                <Button
-                    android:id="@+id/Stub"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onStubClicked"
-                    android:text="Clear Points" />
-            </TableRow>
 
         </TableLayout>
     </ScrollView>

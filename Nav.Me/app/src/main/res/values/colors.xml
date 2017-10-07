@@ -2,5 +2,10 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffff00</color>
+    <color name="avgTime">#999999</color>
+    <color name="shopName">#222222</color>
+    <color name="textColorWhite">#ffffff</color>
+    <color name="textColorBlack">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>

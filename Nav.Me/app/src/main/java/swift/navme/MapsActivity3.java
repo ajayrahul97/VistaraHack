@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -48,30 +47,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import swift.navme.Hardcode.hardcode;
+import swift.navme.Models.Shop;
 
 /**
  * A demo activity showing how to use indoor.
  */
 public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindowClickListener,OnMapReadyCallback {
     private GoogleMap mMap;
-    private LatLng point1, point2, origin;
+    private LatLng point2, origin;
+    private static LatLng point1 = hardcode.pathPoints.get(0);
     private ArrayList<Circle> drawnCircle;
     int i = 2;
     int k = 0;
     public int time = 20 ;
     private NotificationCompat.Builder mBuilder;
     private boolean showLevelPicker = true;
+
+    Shop mShop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +91,7 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
 
+        mShop = (Shop)getIntent().getSerializableExtra("shop");
 
     }
 
@@ -110,13 +107,20 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         mMap = map;
         origin = hardcode.entryPoints.get(2);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 18));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                point1 = latLng;
-            }
-        });
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//                point1 = latLng;
+//            }
+//        });
+        drawCircle(point1,8);
         mMap.setOnInfoWindowClickListener(this);
+        LatLng destination = new LatLng(mShop.getLat(), mShop.getLongi());
+        drawPath(point1, destination);
+        addMarkers(destination,mShop.getShopName(), mShop.getDescription());
+        point1 = destination;
+
+
     }
 
     /**
