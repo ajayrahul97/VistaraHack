@@ -22,12 +22,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.IndoorLevel;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -36,6 +47,8 @@ import java.util.List;
 public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private LatLng point1, point2,origin;
+
 
     private boolean showLevelPicker = true;
 
@@ -47,12 +60,21 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.614631, -122.385153), 18));
+        origin = new LatLng(37.614631, -122.385153);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 18));
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                point1 = latLng;
+            }
+        });
     }
 
     /**
@@ -116,7 +138,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
                     newLevel = levels.size() - 1;
                 }
                 IndoorLevel level = levels.get(newLevel);
-                setText("Activiating level " + level.getName());
+                setText("Activating level " + level.getName());
                 level.activate();
             } else {
                 setText("No levels in building");
@@ -126,8 +148,94 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
+    public void onAddMarker(View view){
+        if(point1!=null){
+            addMarkers(point1,"Here");
+        }
+
+
+    }
+
+    public void onAddPath(View view){
+        drawPath(point1,origin);
+    }
+
     private void setText(String message) {
         TextView text = (TextView) findViewById(R.id.top_text);
         text.setText(message);
     }
+
+    public void addMarkers(LatLng pos,String text){
+        mMap.addMarker(new MarkerOptions().position(pos).title(text));
+
+    }
+
+    public void drawPath(LatLng pos1, LatLng pos2){
+
+        Polyline polyline  = mMap.addPolyline(new PolylineOptions()
+        .add(pos1,pos2)
+        .width(4)
+        .color(Color.parseColor("#05b1fb"))//Google maps blue color
+        .geodesic(true));
+    }
+
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+
+        // Sensor enabled
+        String sensor = "sensor=false";
+        String mode = "mode=driving";
+
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
+
+        // Output format
+        String output = "json";
+
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+
+
+        return url;
+    }
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(strUrl);
+
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            urlConnection.connect();
+
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+            data = sb.toString();
+
+            br.close();
+
+        } catch (Exception e) {
+            Log.d("Exception", e.toString());
+        } finally {
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        return data;
+    }
+
 }

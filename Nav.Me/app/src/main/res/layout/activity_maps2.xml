@@ -18,6 +18,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="8dp"
         android:layout_weight="1">
 
         <fragment
@@ -47,18 +48,35 @@
             <TableRow>
 
                 <Button
-                    android:id="@+id/focused_bulding_info_button"
+                    android:id="@+id/focused_building_info_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onFocusedBuildingInfo"
-                    android:text="focused_building_info" />
+                    android:text="Focused building" />
 
                 <Button
                     android:id="@+id/toggle_level_picker_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onToggleLevelPicker"
-                    android:text="toggle_level_picker" />
+                    android:text="Toggle Level Picker" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/add_marker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onAddMarker"
+                    android:text="Add Marker" />
+
+                <Button
+                    android:id="@+id/add_path"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onAddPath"
+                    android:text="Add Path" />
             </TableRow>
 
             <TableRow>
@@ -68,15 +86,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onVisibleLevelInfo"
-                    android:text="focused_level_info" />
+                    android:text="Focused Level" />
 
                 <Button
                     android:id="@+id/higher_level_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onHigherLevel"
-                    android:text="activate_higher_level" />
+                    android:text="Activate Higher Level" />
             </TableRow>
+
         </TableLayout>
     </ScrollView>
 </LinearLayout>
