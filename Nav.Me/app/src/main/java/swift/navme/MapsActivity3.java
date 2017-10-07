@@ -87,7 +87,16 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         Intent resultIntent = new Intent(this,  MapsActivity3.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MapsActivity3.class);
+
         textView = (TextView)findViewById(R.id.tv_timer) ;
+        textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onNotification(view);
+                return true;
+            }
+        });
+
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
