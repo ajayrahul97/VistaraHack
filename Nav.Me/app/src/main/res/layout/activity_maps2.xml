@@ -18,14 +18,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
         android:layout_weight="1">
 
         <fragment
             android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.SupportMapFragment" />
+            android:layout_height="match_parent" />
         <!-- A small label at the top of the screen. -->
         <TextView
             android:id="@+id/top_text"
@@ -36,39 +35,19 @@
             android:textColor="#000" />
     </RelativeLayout>
     <!-- A set of test buttons. -->
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="40dp"
+        android:id="@+id/tv_timer"
+        android:background="@color/textColorBlack"
+        android:text="2:30:30"
+        android:textAlignment="center"
+        android:textColor="@color/textColorWhite"
+        android:layout_marginBottom="32dp"
+        android:textSize="64dp"
+
         >
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
 
-            <TableRow>
-
-
-                <Button
-                    android:id="@+id/toggle_level_picker_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onToggleLevelPicker"
-                    android:text="Toggle Level Picker" />
-
-
-                <Button
-                    android:id="@+id/higher_level_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onHigherLevel"
-                    android:text="Activate Higher Level" />
-            </TableRow>
-
-
-
-
-        </TableLayout>
-    </ScrollView>
+    </TextView>
 </LinearLayout>

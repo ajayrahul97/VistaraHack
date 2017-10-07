@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -66,8 +67,9 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
     public int time = 20 ;
     private NotificationCompat.Builder mBuilder;
     private boolean showLevelPicker = true;
-
+    CountDownTimer countDownTimer;
     Shop mShop;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +87,37 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         Intent resultIntent = new Intent(this,  MapsActivity3.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MapsActivity3.class);
-
+        textView = (TextView)findViewById(R.id.tv_timer) ;
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
-
         mShop = (Shop)getIntent().getSerializableExtra("shop");
+
+        int time_left = BaseActivity.hour*3600+BaseActivity.minutes*60+BaseActivity.seconds;
+
+        countDownTimer = new CountDownTimer(time_left*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                String hour = String.format("%02d", BaseActivity.hour);
+                String min = String.format("%02d", BaseActivity.minutes);
+                String sec = String.format("%02d", BaseActivity.seconds);
+                textView.setText(hour+":"+min+":"+sec);
+                BaseActivity.seconds--;
+                if(BaseActivity.seconds<=0){
+                    BaseActivity.minutes--;
+                    BaseActivity.seconds=60;
+                }
+                if(BaseActivity.minutes<=0){
+                    BaseActivity.hour--;
+                    BaseActivity.minutes=60;
+                }
+            }
+            public void onFinish() {
+                textView.setText("Boarding Time");
+            }
+        };
+        countDownTimer.start();
 
     }
 
@@ -161,9 +187,25 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        countDownTimer.cancel();
+        if(BaseActivity.minutes-mShop.getAvgTime()>0){
+            BaseActivity.minutes=BaseActivity.minutes-mShop.getAvgTime();
+        }else{
+            BaseActivity.minutes=60+BaseActivity.minutes-mShop.getAvgTime();
+            BaseActivity.hour--;
+        }
+        Intent i = new Intent(MapsActivity3.this,UserPreferenceActivity.class);
+        startActivity(i);
+        finish();
+    }
+
     /**
      * Called when the activate higher level is clicked.
      */
+
+
     public void onHigherLevel(View view) {
         IndoorBuilding building = mMap.getFocusedBuilding();
         if (building != null) {

@@ -36,6 +36,10 @@ public class BaseActivity extends AppCompatActivity {
     private final static int REQUEST_ENABLE_LOCATION = 2;
     private final static int REQUEST_ENABLE_FINE_LOCATION = 3;
     public final static String BEACON = "UID";
+    public  static int seconds = 30;
+    public  static int minutes = 30;
+    public  static int hour = 02;
+
 
     BroadcastReceiver broadcastReceiver;
     ArrayList<IEddystoneDevice> beaconsArray;
