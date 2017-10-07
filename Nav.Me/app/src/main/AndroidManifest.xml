@@ -42,9 +42,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-
-        <activity android:name=".BaseActivity"></activity>
-
+        <activity android:name=".BaseActivity" />
 
         <service
             android:name="com.kontakt.sdk.android.ble.service.ProximityService"
@@ -56,7 +54,6 @@
                 <action android:name="connectBeacon" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".BeaconService.DisconnectBeaconListener">
             <intent-filter>
                 <action android:name="disconnectBeacon" />
@@ -65,10 +62,11 @@
 
         <activity
             android:name=".MapsActivity2"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".MapsActivity3"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".CityActivity"></activity>
     </application>
 
 </manifest>
