@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
         gotomaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,MapsActivity2.class);
+                Intent i = new Intent(MainActivity.this,MapsActivity3.class);
                 startActivity(i);
             }
         });
