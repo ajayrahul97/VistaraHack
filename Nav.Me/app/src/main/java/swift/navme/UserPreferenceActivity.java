@@ -1,4 +1,4 @@
-package swift.navme.draganddrop;
+package swift.navme;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -15,13 +14,15 @@ import java.util.Comparator;
 import java.util.List;
 
 import swift.navme.Models.Category;
-import swift.navme.R;
-import swift.navme.SubPreferenceActivity;
+import swift.navme.draganddrop.ItemViewHolder;
+import swift.navme.draganddrop.OnRecyclerItemChecked;
+import swift.navme.draganddrop.RecyclerListAdapter;
+import swift.navme.draganddrop.SimpleItemTouchHelperCallback;
 
-public class RecyclerActivity extends AppCompatActivity implements ItemViewHolder.OnStartDragListener, OnRecyclerItemChecked {
+public class UserPreferenceActivity extends AppCompatActivity implements ItemViewHolder.OnStartDragListener, OnRecyclerItemChecked {
 
     ItemTouchHelper mItemTouchHelper;
-    private static String TAG = RecyclerActivity.class.getSimpleName();
+    private static String TAG = UserPreferenceActivity.class.getSimpleName();
 
     List<Category> categories = new ArrayList<>();
 

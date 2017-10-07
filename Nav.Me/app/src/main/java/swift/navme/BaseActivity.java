@@ -41,7 +41,6 @@ public class BaseActivity extends AppCompatActivity {
     ArrayList<IEddystoneDevice> beaconsArray;
     private BluetoothAdapter bluetoothAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

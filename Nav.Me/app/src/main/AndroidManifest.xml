@@ -70,7 +70,7 @@
         <activity android:name=".SubPreferenceActivity" />
         <activity android:name=".FlightDetails" />
         <activity android:name=".EnterPnrActivity" />
-        <activity android:name=".draganddrop.RecyclerActivity"></activity>
+        <activity android:name=".UserPreferenceActivity"></activity>
     </application>
 
 </manifest>

@@ -17,6 +17,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> 
 
     private List<Shop> shopsList;
 
+    private final OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        public void onItemClick(Shop shop);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public RatingBar ratingBar;
         public TextView shopName, avgTime, description, timeToReach, distance;
@@ -36,8 +42,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> 
     }
 
 
-    public ShopAdapter(List<Shop> shopsList) {
+    public ShopAdapter(List<Shop> shopsList, OnItemClickListener listener) {
         this.shopsList = shopsList;
+        this.listener = listener;
     }
 
     @Override
@@ -49,7 +56,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Shop shop = shopsList.get(position);
         holder.shopName.setText(shop.getShopName());
         holder.description.setText(shop.getDescription());
@@ -59,6 +66,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> 
         holder.distance.setText(shop.getDistance() + "m");
         holder.ratingBar.setRating((float)shop.getRating());
         holder.timeToReach.setText(shop.getTimeToReach() + " min to reach");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(shopsList.get(position));
+            }
+        });
     }
 
     @Override

@@ -1,6 +1,8 @@
 package swift.navme.Models;
 
-public class Shop {
+import java.io.Serializable;
+
+public class Shop implements Serializable{
     private String shopName, description;
     private int imageId, avgTime, timeToReach, distance;
     private double rating;

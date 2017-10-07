@@ -1,5 +1,6 @@
 package swift.navme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,7 +33,14 @@ public class SubPreferenceActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new ShopAdapter(shopList);
+        mAdapter = new ShopAdapter(shopList, new ShopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Shop shop) {
+                Intent i = new Intent(getApplicationContext(), MapsActivity3.class);
+                i.putExtra("shop", shop);
+                startActivity(i);
+            }
+        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -60,7 +68,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s1 = new Shop("McDonalds",
                         "Restaurant | Burgers and Fries",
                         25,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         5,
                         100,
                         4.5,
@@ -69,7 +77,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s2 = new Shop("Dominos",
                         "Restaurant | Pizzas",
                         30,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         10,
                         200,
                         4.3,
@@ -78,7 +86,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s3 = new Shop("KFC",
                         "Restaurant | Burgers and Fries",
                         20,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         5,
                         100,
                         4.4,
@@ -92,7 +100,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s1 = new Shop("CCD",
                         "Coffee and Pastry",
                         16,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         6,
                         120,
                         4.5,
@@ -101,7 +109,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s2 = new Shop("Starbucks",
                         "Coffee",
                         15,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         10,
                         200,
                         4.7,
@@ -115,7 +123,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s1 = new Shop("Washroom",
                         "",
                         2,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         4,
                         80,
                         4.7,
@@ -124,7 +132,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s2 = new Shop("WheelChair",
                         "get free assistance",
                         5,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         4,
                         80,
                         5.0,
@@ -137,7 +145,7 @@ public class SubPreferenceActivity extends AppCompatActivity {
                 Shop s1 = new Shop("BookStore",
                         "Bibliphile corner",
                         20,
-                        R.drawable.food_shop_pizza,
+                        R.drawable.food_shop_1,
                         7,
                         140,
                         4.7,

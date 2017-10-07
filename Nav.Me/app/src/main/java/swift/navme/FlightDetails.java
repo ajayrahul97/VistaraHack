@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import swift.navme.draganddrop.RecyclerActivity;
-
 public class FlightDetails extends AppCompatActivity {
 
     @Override
@@ -16,7 +14,7 @@ public class FlightDetails extends AppCompatActivity {
     }
 
     public void OnClickContinue(View view) {
-        Intent i = new Intent(this, RecyclerActivity.class);
+        Intent i = new Intent(this, UserPreferenceActivity.class);
         startActivity(i);
     }
 }
