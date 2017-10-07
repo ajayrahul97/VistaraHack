@@ -38,7 +38,9 @@
     <!-- A set of test buttons. -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:layout_marginBottom="40dp"
+        >
 
         <TableLayout
             android:layout_width="match_parent"
@@ -94,6 +96,24 @@
                     android:layout_height="wrap_content"
                     android:onClick="onHigherLevel"
                     android:text="Activate Higher Level" />
+            </TableRow>
+
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/locate_me_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onLocateMeClicked"
+                    android:text="Locate Me" />
+
+                <Button
+                    android:id="@+id/Stub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onStubClicked"
+                    android:text="Clear Points" />
             </TableRow>
 
         </TableLayout>

@@ -19,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.IndoorLevel;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,15 +41,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A demo activity showing how to use indoor.
- */
-public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {
+import swift.navme.Hardcode.hardcode;
+
+    /**
+     * A demo activity showing how to use indoor.
+     */
+public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LatLng point1, point2,origin;
+    private LatLng point1, point2, origin;
+    private ArrayList<Circle> drawnCircle;
+    int i = 2;
 
 
     private boolean showLevelPicker = true;
@@ -60,7 +67,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        drawnCircle = new ArrayList<>();
 
     }
 
@@ -73,8 +80,11 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onMapClick(LatLng latLng) {
                 point1 = latLng;
+
             }
         });
+
+
     }
 
     /**
@@ -203,6 +213,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
         return url;
     }
+
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -238,4 +249,26 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
         return data;
     }
 
+
+    private void drawCircle(LatLng center, float r){
+        Circle circle = mMap.addCircle(new CircleOptions()
+                .center(center)
+                .radius(r)
+                .strokeColor(Color.BLACK)
+                .strokeWidth((float) 1)
+                .fillColor(Color.argb(70,0,0,255)));
+        drawnCircle.add(circle);
+    }
+
+
+    public void onLocateMeClicked(View view) {
+        int point = (i++)%3;
+        drawCircle(hardcode.entryPoints.get(point),8);
+    }
+
+    public void onStubClicked(View view) {
+        for(int i = 0; i < drawnCircle.size(); i++){
+            drawnCircle.get(i).setVisible(false);
+        }
+    }
 }

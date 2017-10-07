@@ -22,11 +22,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.kontakt.sdk.android.common.profile.IEddystoneDevice;
 
 import java.util.ArrayList;
 
 import swift.navme.BeaconService.BeaconFinderService;
+import swift.navme.Hardcode.hardcode;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -46,6 +48,7 @@ public class BaseActivity extends AppCompatActivity {
         makeReceiver();
         checkPermissions();
         makeSnackbar();
+        addStaticData();
     }
 
     private void makeSnackbar() {
@@ -97,7 +100,11 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 beaconsArray = intent.getParcelableArrayListExtra(BeaconFinderService.beacons_array);
-                Toast.makeText(BaseActivity.this, "Beacon Found!", Toast.LENGTH_LONG).show();
+                Toast.makeText(BaseActivity.this, "Beacon Found! \n" + beaconsArray.get(0).getUrl() + "\n" +
+                        beaconsArray.get(0).getUniqueId(), Toast.LENGTH_LONG).show();
+
+
+
             }
         };
     }
@@ -235,5 +242,14 @@ public class BaseActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private void addStaticData(){
+        hardcode.entryPoints = new ArrayList<>();
+        hardcode.entryPoints.add(new LatLng(37.617809,-122.386687));
+        hardcode.entryPoints.add(new LatLng(37.616845,-122.384237));
+        hardcode.entryPoints.add(new LatLng(37.614802,-122.385497));
+    }
+
+
 
 }
