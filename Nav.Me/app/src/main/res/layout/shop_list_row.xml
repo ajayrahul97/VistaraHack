@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="220dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:src="@drawable/food_shop_pizza"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/shop_name"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:text="Dominos"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/shop_type"
+        android:layout_below="@id/shop_name"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:text="Pizza"
+        android:layout_margin="10dp"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content" />
+
+    <RatingBar
+        android:id="@+id/ratings_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shop_type"
+        android:rating="4.5"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:transformPivotX="0dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/time_to_reach_textView"
+        android:layout_below="@id/ratings_bar"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:text="2 min to reach"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/avg_time"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="42 min"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/gps"/>
+
+        <TextView
+            android:id="@+id/ditance_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100m"
+            android:textSize="22sp"
+            android:textColor="@color/textColorWhite"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
