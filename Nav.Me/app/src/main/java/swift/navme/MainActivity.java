@@ -22,4 +22,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void OnClickUserPreference(View view) {
+        Intent i = new Intent(this, UserPreferenceActivity.class);
+        startActivity(i);
+    }
 }

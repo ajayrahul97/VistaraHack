@@ -16,4 +16,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to user preferences"
+        android:id="@+id/user_preference"
+        app:layout_constraintTop_toBottomOf="@id/gotomaps"
+        android:onClick="OnClickUserPreference"/>
+
 </android.support.constraint.ConstraintLayout>
