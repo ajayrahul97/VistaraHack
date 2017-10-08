@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".EnterPnrActivity"
+            android:label="Enter Your PNR">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,11 +73,11 @@
             android:label="Select where you wanna go"/>
         <activity android:name=".FlightDetails"
             android:label="Flight Details"/>
-        <activity android:name=".EnterPnrActivity"
-            android:label="Enter Your PNR"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".UserPreferenceActivity"
             android:label="Select Your Preferences"/>
-        <activity android:name=".StatsActivity"></activity>
+        <activity android:name=".StatsActivity"
+            android:label="Stats"></activity>
     </application>
 
 </manifest>

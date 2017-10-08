@@ -2,14 +2,13 @@ package swift.navme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class EnterPnrActivity extends AppCompatActivity {
+public class EnterPnrActivity extends BaseActivity {
 
     String str;
     TextView tv_pnr;
