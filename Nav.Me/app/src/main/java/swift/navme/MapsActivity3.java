@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import swift.navme.Hardcode.hardcode;
+import swift.navme.Helpers.Helper;
 import swift.navme.Models.Shop;
 
 /**
@@ -92,7 +93,7 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onNotification(view);
+                onNotification();
                 return true;
             }
         });
@@ -102,7 +103,8 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         mShop = (Shop)getIntent().getSerializableExtra("shop");
-
+        Helper.shopsVisited.add(mShop.getShopName());
+        Helper.timeTaken.add(mShop.getAvgTime());
         int time_left = BaseActivity.hour*3600+BaseActivity.minutes*60+BaseActivity.seconds;
 
         countDownTimer = new CountDownTimer(time_left*1000, 1000) {
@@ -124,6 +126,13 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
             }
             public void onFinish() {
                 textView.setText("Boarding Time");
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(getApplicationContext(), StatsActivity.class);
+                        startActivity(i);
+                    }
+                });
             }
         };
         countDownTimer.start();
@@ -417,7 +426,7 @@ public class MapsActivity3 extends BaseActivity implements GoogleMap.OnInfoWindo
         drawCircle(hardcode.entryPoints.get(point),8);
     }
 
-    public void onNotification(View view) {
+    public void onNotification() {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 // notificationID allows you to update the notification later on.

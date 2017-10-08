@@ -18,7 +18,6 @@ package swift.navme;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,8 +58,6 @@ public class MapsActivity2 extends BaseActivity implements OnMapReadyCallback {
     private LatLng point1, point2, origin;
     private ArrayList<Circle> drawnCircle;
     int i = 2;
-
-
     private boolean showLevelPicker = true;
 
     @Override

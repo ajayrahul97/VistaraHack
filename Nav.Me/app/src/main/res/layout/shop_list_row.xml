@@ -6,13 +6,24 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/background"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:src="@drawable/food_shop_pizza"
-        android:scaleType="centerCrop"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/washroom"
+            android:scaleType="centerCrop" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="#55555555" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/shop_name"
@@ -41,6 +52,7 @@
         android:rating="4.5"
         android:scaleX="0.5"
         android:scaleY="0.5"
+        style="@style/RatingBar"
         android:transformPivotX="0dp"
         android:layout_marginLeft="10dp"/>
 
@@ -57,7 +69,8 @@
     <TextView
         android:id="@+id/avg_time"
         android:textColor="#ffffff"
-        android:textSize="40sp"
+        android:textSize="30sp"
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
         android:text="42 min"
@@ -70,6 +83,7 @@
         android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
+        android:layout_margin="10dp"
         android:layout_alignParentRight="true">
 
         <ImageView

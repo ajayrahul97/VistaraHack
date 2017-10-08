@@ -66,11 +66,16 @@
         <activity
             android:name=".MapsActivity3"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CityActivity"></activity>
-        <activity android:name=".SubPreferenceActivity" />
-        <activity android:name=".FlightDetails" />
-        <activity android:name=".EnterPnrActivity" />
-        <activity android:name=".UserPreferenceActivity"></activity>
+        <activity android:name=".CityActivity" />
+        <activity android:name=".SubPreferenceActivity"
+            android:label="Select where you wanna go"/>
+        <activity android:name=".FlightDetails"
+            android:label="Flight Details"/>
+        <activity android:name=".EnterPnrActivity"
+            android:label="Enter Your PNR"/>
+        <activity android:name=".UserPreferenceActivity"
+            android:label="Select Your Preferences"/>
+        <activity android:name=".StatsActivity"></activity>
     </application>
 
 </manifest>
