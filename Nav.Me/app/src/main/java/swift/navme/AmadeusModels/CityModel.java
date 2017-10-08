@@ -1,4 +1,4 @@
-package swift.navme;
+package swift.navme.AmadeusModels;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,6 +7,18 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class CityModel {
+    public String getName() {
+        return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     @SerializedName("name")
     String name;
     @SerializedName("state")

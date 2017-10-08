@@ -21,7 +21,7 @@ public class NetworkingFactory {
     private static NetworkingFactory cityInstance;
 
     public static void init(Context context) {
-        cityInstance = new NetworkingFactory(context, "jUvOnfAlDYbiG5mNQa9HtBHAXCNYZhzX", true);
+        cityInstance = new NetworkingFactory(context, "https://api.sandbox.amadeus.com/v1.2/", true);
     }
 
     public static NetworkingFactory getCityInstance() {
